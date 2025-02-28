@@ -2,10 +2,16 @@
 //   props: string;
 // }
 
+import ImageHolder from "./ImageHolder";
+
 const PorductCard = () => {
   return (
-    <div className="border rounded-md p-2 flex flex-col bg-white">
-      <img src="src/assets/tgfh13b9.bmp" alt="Porudct Photo" />
+    <div className="border rounded-3xl p-2 flex flex-col bg-white m-1">
+      <ImageHolder
+        imageUrl="src/assets/tgfh13b9.bmp"
+        alt="Product Photo"
+        className="rounded-3xl"
+      />
       <h1>Porche 911 Gt3</h1>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem,
@@ -14,9 +20,9 @@ const PorductCard = () => {
         esse sint cumque labore ratione!
       </p>
       <div className="flex space-x-2 m-2">
-        <span className="w-4 h-4 bg-amber-300 rounded-full" />
-        <span className="w-4 h-4 bg-green-300 rounded-full" />
-        <span className="w-4 h-4 bg-red-300 rounded-full" />
+        <span className="w-5 h-5 bg-amber-400 my-1 rounded-full cursor-pointer" />
+        <span className="w-5 h-5 bg-green-400 my-1 rounded-full cursor-pointer" />
+        <span className="w-5 h-5 bg-red-400 my-1 rounded-full cursor-pointer" />
       </div>
 
       <div className="flex items-center justify-between m-2">
