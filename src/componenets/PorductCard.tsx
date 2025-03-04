@@ -3,9 +3,16 @@ import { IProductCard } from "../interfaces";
 import Button from "./Button";
 import ImageHolder from "./ImageHolder";
 
-const PorductCard = ({ title, descreption, productImage }: IProductCard) => {
+const PorductCard = ({
+  title,
+  descreption,
+  productImage,
+  price,
+  category,
+  colors,
+}: IProductCard) => {
   return (
-    <div className="border rounded-3xl p-2 flex flex-col bg-white m-1">
+    <div className="max-w-sm mx-auto md:max-w-lg 2xl:max-w-80 border rounded-3xl p-2 flex flex-col bg-white m-1">
       <ImageHolder
         imageUrl={productImage}
         alt="Product Photo"
@@ -20,10 +27,10 @@ const PorductCard = ({ title, descreption, productImage }: IProductCard) => {
       </div>
 
       <div className="flex items-center justify-between m-2">
-        <p>$150,000</p>
+        <p>${price}</p>
         <img
-          src="src/assets/tgfh13b9.bmp"
-          alt="catagory photo"
+          src={category.imgURL}
+          alt={category.name}
           className="w-10 h-10 rounded-full"
         />
       </div>

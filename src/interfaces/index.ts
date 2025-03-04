@@ -12,7 +12,14 @@ export interface IProduct {
 }
 
 export interface IProductCard {
+  id?: string;
   title: string;
   descreption: string;
   productImage: string;
+  price: string;
+  colors: string[];
+  category: {
+    name: string;
+    imgURL: string;
+  };
 }
