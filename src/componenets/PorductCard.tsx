@@ -1,24 +1,18 @@
-// interface IPorductCard {
-//   props: string;
-// }
-
+import TextSlicer from "../functions/TextSlicer";
+import { IProductCard } from "../interfaces";
+import Button from "./Button";
 import ImageHolder from "./ImageHolder";
 
-const PorductCard = () => {
+const PorductCard = ({ title, descreption, productImage }: IProductCard) => {
   return (
     <div className="border rounded-3xl p-2 flex flex-col bg-white m-1">
       <ImageHolder
-        imageUrl="src/assets/tgfh13b9.bmp"
+        imageUrl={productImage}
         alt="Product Photo"
         className="rounded-3xl"
       />
-      <h1>Porche 911 Gt3</h1>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem,
-        ducimus illum aliquam laborum voluptates optio sed veritatis ut
-        distinctio incidunt voluptatibus corrupti atque necessitatibus dolorum
-        esse sint cumque labore ratione!
-      </p>
+      <h1>{title}</h1>
+      <p>{TextSlicer(descreption)}</p>
       <div className="flex space-x-2 m-2">
         <span className="w-5 h-5 bg-amber-400 my-1 rounded-full cursor-pointer" />
         <span className="w-5 h-5 bg-green-400 my-1 rounded-full cursor-pointer" />
@@ -34,12 +28,14 @@ const PorductCard = () => {
         />
       </div>
       <div className="flex m-1 space-x-3">
-        <button className="text-white w-full bg-indigo-700 rounded-md ">
-          Edit
-        </button>
-        <button className="text-white w-full bg-red-500 rounded-md">
-          Delete
-        </button>
+        <Button
+          buttonName="Edit"
+          classname="text-white w-full rounded-3xl bg-indigo-700"
+        />
+        <Button
+          buttonName="Delete"
+          classname="text-white w-full rounded-3xl bg-red-600"
+        />
       </div>
     </div>
   );
