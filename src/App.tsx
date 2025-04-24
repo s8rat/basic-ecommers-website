@@ -1,9 +1,10 @@
 import { useState } from "react";
 import PorductCard from "./componenets/PorductCard";
 import Button from "./componenets/Button";
-import { productList } from "./data";
+import { formInputsList, productList } from "./data";
 import { IProduct } from "./interfaces";
 import Modal from "./componenets/Modal";
+import Input from "./componenets/Input";
 
 const App = () => {
   //* ----------- State ------------ *//
@@ -32,6 +33,13 @@ const App = () => {
       colors={product.colors}
     />
   ));
+
+  const renderFormInput = formInputsList.map((input) => (
+    <div className="flex flex-col" key={input.id}>
+      <label htmlFor={input.id}>{input.label}</label>
+      <Input type="text" id={input.id} name={input.name} />
+    </div>
+  ));
   return (
     <main className="container mx-auto lg:p-20 md:p-15">
       <Button
@@ -43,17 +51,21 @@ const App = () => {
         {renderProducts}
       </div>
       <Modal isOpen={isOpen} close={close} title="Add Product">
-        <div className="flex items-center space-x-2">
-          <Button
-            classname="text-white w-full rounded-3xl bg-indigo-700"
-            buttonName="Sumbit"
-          ></Button>
-          <Button
-            classname="text-white w-full rounded-3xl bg-gray-400 hover:bg-gray-700"
-            buttonName="Cancel"
-            onclick={close}
-          ></Button>
-        </div>
+        <form className="space-y-3">
+          {renderFormInput}
+
+          <div className="flex items-center space-x-3">
+            <Button
+              classname="text-white w-full rounded-lg bg-indigo-700"
+              buttonName="Sumbit"
+            ></Button>
+            <Button
+              classname="text-white w-full rounded-lg bg-gray-400 hover:bg-gray-700"
+              buttonName="Cancel"
+              onclick={close}
+            ></Button>
+          </div>
+        </form>
       </Modal>
     </main>
   );

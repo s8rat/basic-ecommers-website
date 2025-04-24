@@ -32,3 +32,10 @@ export interface IModal {
   title?: string;
   children: ReactNode;
 }
+
+export interface IFormInput {
+  id: string;
+  name: string;
+  label: string;
+  type: string;
+}
