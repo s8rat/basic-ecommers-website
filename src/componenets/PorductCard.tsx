@@ -9,8 +9,8 @@ const PorductCard = ({
   productImage,
   price,
   category,
-  colors,
-}: IProductCard) => {
+}: // colors,
+IProductCard) => {
   return (
     <div className="max-w-sm mx-auto md:max-w-lg 2xl:max-w-80 border rounded-3xl p-2 flex flex-col bg-white m-1">
       <ImageHolder

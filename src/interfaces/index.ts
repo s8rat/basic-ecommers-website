@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IProduct {
   id?: string;
   title: string;
@@ -22,4 +24,11 @@ export interface IProductCard {
     name: string;
     imgURL: string;
   };
+}
+
+export interface IModal {
+  isOpen: boolean;
+  close: () => void;
+  title?: string;
+  children: ReactNode;
 }

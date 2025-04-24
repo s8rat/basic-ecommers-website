@@ -1,7 +1,7 @@
 interface IButton {
   buttonName: string;
   classname: string;
-  onclick?: undefined;
+  onclick?: () => void;
 }
 
 const Button = ({ buttonName, classname, onclick }: IButton) => {
