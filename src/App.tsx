@@ -5,6 +5,8 @@ import { formInputsList, productList } from "./data";
 import Modal from "./componenets/Modal";
 import Input from "./componenets/Input";
 import { IProduct } from "./interfaces";
+import { ProductValidation } from "./validation";
+import ErrorMsg from "./componenets/ErrorMsg";
 
 const App = () => {
   //* ----------- State ------------ *//
@@ -23,6 +25,12 @@ const App = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProductValues);
+  const [isErrors, setIsErros] = useState({
+    title: "",
+    description: "",
+    imageURL: "",
+    price: "",
+  });
 
   //* ----------- Handlers ------------ *//
 
@@ -34,12 +42,29 @@ const App = () => {
     const { value, name } = e.target;
 
     setProduct({ ...product, [name]: value });
+    setIsErros({ ...isErrors, [name]: "" });
   }
 
   const submithandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(product);
+    const { title, description, imageURL, price } = product;
+
+    const errors = ProductValidation({
+      title,
+      description,
+      imageURL,
+      price,
+    });
+
+    const hasErrors = Object.values(errors).some((value) => value != "");
+
+    if (hasErrors) {
+      setIsErros(errors);
+      return;
+    }
+
+    console.log("go to the server all clear");
   };
 
   const closehandler = () => {
@@ -70,6 +95,7 @@ const App = () => {
         value={product[input.name]}
         onChange={inputOnchange}
       />
+      <ErrorMsg msg={isErrors[input.name]} />
     </div>
   ));
 
