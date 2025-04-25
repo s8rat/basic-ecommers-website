@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import PorductCard from "./componenets/PorductCard";
 import Button from "./componenets/Button";
 import { formInputsList, productList } from "./data";
@@ -9,8 +9,7 @@ import { IProduct } from "./interfaces";
 const App = () => {
   //* ----------- State ------------ *//
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState<IProduct>({
+  const defaultProductValues = {
     title: "",
     description: "",
     imageURL: "",
@@ -20,23 +19,33 @@ const App = () => {
       name: "",
       imageURL: "",
     },
-  });
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [product, setProduct] = useState<IProduct>(defaultProductValues);
 
   //* ----------- Handlers ------------ *//
 
-  function close() {
-    setIsOpen(false);
-  }
+  const close = () => setIsOpen(false);
 
-  function open() {
-    setIsOpen(true);
-  }
+  const open = () => setIsOpen(true);
 
   function inputOnchange(e: ChangeEvent<HTMLInputElement>) {
     const { value, name } = e.target;
 
     setProduct({ ...product, [name]: value });
   }
+
+  const submithandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log(product);
+  };
+
+  const closehandler = () => {
+    setProduct(defaultProductValues);
+    close();
+  };
 
   //* ----------- Render ------------ *//
   const renderProducts = productList.map((product) => (
@@ -75,7 +84,7 @@ const App = () => {
         {renderProducts}
       </div>
       <Modal isOpen={isOpen} close={close} title="Add Product">
-        <form className="space-y-3">
+        <form className="space-y-3" onSubmit={submithandler}>
           {renderFormInput}
 
           <div className="flex items-center space-x-3">
@@ -86,7 +95,7 @@ const App = () => {
             <Button
               classname="text-white w-full rounded-lg bg-gray-400 hover:bg-gray-700"
               buttonName="Cancel"
-              onclick={close}
+              onclick={closehandler}
             ></Button>
           </div>
         </form>
