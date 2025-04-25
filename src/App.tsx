@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import PorductCard from "./componenets/PorductCard";
 import Button from "./componenets/Button";
 import { formInputsList, productList } from "./data";
-import { IProduct } from "./interfaces";
 import Modal from "./componenets/Modal";
 import Input from "./componenets/Input";
+import { IProduct } from "./interfaces";
 
 const App = () => {
   //* ----------- State ------------ *//
 
   const [isOpen, setIsOpen] = useState(false);
+  const [product, setProduct] = useState<IProduct>({
+    title: "",
+    description: "",
+    imageURL: "",
+    price: "",
+    colors: [],
+    category: {
+      name: "",
+      imageURL: "",
+    },
+  });
 
   //* ----------- Handlers ------------ *//
 
@@ -19,6 +30,12 @@ const App = () => {
 
   function open() {
     setIsOpen(true);
+  }
+
+  function inputOnchange(e: ChangeEvent<HTMLInputElement>) {
+    const { value, name } = e.target;
+
+    setProduct({ ...product, [name]: value });
   }
 
   //* ----------- Render ------------ *//
@@ -37,9 +54,16 @@ const App = () => {
   const renderFormInput = formInputsList.map((input) => (
     <div className="flex flex-col" key={input.id}>
       <label htmlFor={input.id}>{input.label}</label>
-      <Input type="text" id={input.id} name={input.name} />
+      <Input
+        type="text"
+        id={input.id}
+        name={input.name}
+        value={product[input.name]}
+        onChange={inputOnchange}
+      />
     </div>
   ));
+
   return (
     <main className="container mx-auto lg:p-20 md:p-15">
       <Button
